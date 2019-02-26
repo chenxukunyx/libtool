@@ -1,32 +1,50 @@
 package com.miracle.fast_tool;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import com.miracle.fast_tool.permission.Permission;
 import com.miracle.fast_tool.permission.RxPermissions;
 import com.miracle.fast_tool.utils.LogUtil;
 import com.miracle.fast_tool.utils.ToastMng;
-import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
+import com.uber.autodispose.AutoDispose;
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 import io.reactivex.functions.Consumer;
 
 import java.util.HashSet;
 import java.util.Set;
 
 
-public class BaseActivity extends RxAppCompatActivity {
-    private static final String TAG = "BaseActivity";
+public abstract class BasePermissionActivity extends AppCompatActivity {
+    private static final String TAG = "BasePermissionActivity";
 
     private Set<String> mPressionList = new HashSet<>();
     protected RxPermissions mRxPermissions;
+    private Unbinder unbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
         mRxPermissions = new RxPermissions(this);
         addPermission(addPermission());
         requestPermission();
+        unbinder = ButterKnife.bind(this);
+        initView();
     }
+
+    @Override
+    protected void onDestroy() {
+        unbinder.unbind();
+        super.onDestroy();
+    }
+
+    protected abstract int getLayoutId();
+
+    protected abstract void initView();
 
     private void addPermission(String... permissions) {
         if (permissions != null && permissions.length > 0) {
@@ -44,6 +62,7 @@ public class BaseActivity extends RxAppCompatActivity {
     protected void requestPermission() {
         if (mPressionList.size() >0) {
             mRxPermissions.requestEach(mPressionList.toArray(new String[mPressionList.size()]))
+                    .as(AutoDispose.<Permission>autoDisposable(AndroidLifecycleScopeProvider.from(this)))
                     .subscribe(new Consumer<Permission>() {
                         @Override
                         public void accept(Permission permission) throws Exception {
