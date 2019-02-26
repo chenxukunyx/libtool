@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import com.miracle.fast_tool.permission.Permission;
 import com.miracle.fast_tool.permission.RxPermissions;
 import com.miracle.fast_tool.utils.LogUtil;
@@ -23,28 +21,14 @@ public abstract class BasePermissionActivity extends AppCompatActivity {
 
     private Set<String> mPressionList = new HashSet<>();
     protected RxPermissions mRxPermissions;
-    private Unbinder unbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutId());
         mRxPermissions = new RxPermissions(this);
         addPermission(addPermission());
         requestPermission();
-        unbinder = ButterKnife.bind(this);
-        initView();
     }
-
-    @Override
-    protected void onDestroy() {
-        unbinder.unbind();
-        super.onDestroy();
-    }
-
-    protected abstract int getLayoutId();
-
-    protected abstract void initView();
 
     private void addPermission(String... permissions) {
         if (permissions != null && permissions.length > 0) {
