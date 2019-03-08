@@ -1,6 +1,7 @@
 package com.miracle.fast_tool;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import com.miracle.fast_tool.permission.Permission;
 import com.miracle.fast_tool.permission.RxPermissions;
 import com.miracle.fast_tool.utils.LogUtil;
-import com.miracle.fast_tool.utils.ToastMng;
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 import io.reactivex.functions.Consumer;
@@ -18,17 +18,16 @@ import io.reactivex.functions.Consumer;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/3/8
- * @time: 12:07 PM
- * @fuction:
- */
+
 public class BasePermissionFragment extends Fragment {
 
     private static final String TAG = "BasePermissionFragment";
+
+    public enum PermissionState{
+        GRANTED,
+        SHOULDSHOWREQUESTPERMISSIONRATIONALE,
+        REFUSE
+    }
 
     private Set<String> mPressionList = new HashSet<>();
     protected RxPermissions mRxPermissions;
@@ -66,13 +65,16 @@ public class BasePermissionFragment extends Fragment {
                         @Override
                         public void accept(Permission permission) throws Exception {
                             if (permission.granted) {
+                                permissionState(permission, BasePermissionActivity.PermissionState.GRANTED);
                                 LogUtil.i(TAG, "get permission success");
                             } else if (permission.shouldShowRequestPermissionRationale) {
                                 LogUtil.i(TAG, "get permission failed, next time requset");
-                                ToastMng.INSTANCE.showToast("拒绝访问，等待下次询问哦~");
+//                            ToastMng.INSTANCE.showToast("拒绝访问，等待下次询问哦~");
+                                permissionState(permission, BasePermissionActivity.PermissionState.SHOULDSHOWREQUESTPERMISSIONRATIONALE);
                             } else {
                                 LogUtil.i(TAG, "get permission failed, no request again");
-                                ToastMng.INSTANCE.showToast("拒绝权限，请前往应用权限管理中打开权限~");
+//                            ToastMng.INSTANCE.showToast("拒绝权限，请前往应用权限管理中打开权限~");
+                                permissionState(permission, BasePermissionActivity.PermissionState.REFUSE);
                             }
 
                         }
@@ -87,16 +89,27 @@ public class BasePermissionFragment extends Fragment {
                     @Override
                     public void accept(Permission permission) throws Exception {
                         if (permission.granted) {
+                            permissionState(permission, BasePermissionActivity.PermissionState.GRANTED);
                             LogUtil.i(TAG, "get permission success");
                         } else if (permission.shouldShowRequestPermissionRationale) {
                             LogUtil.i(TAG, "get permission failed, next time requset");
-                            ToastMng.INSTANCE.showToast("拒绝访问，等待下次询问哦~");
+//                            ToastMng.INSTANCE.showToast("拒绝访问，等待下次询问哦~");
+                            permissionState(permission, BasePermissionActivity.PermissionState.SHOULDSHOWREQUESTPERMISSIONRATIONALE);
                         } else {
                             LogUtil.i(TAG, "get permission failed, no request again");
-                            ToastMng.INSTANCE.showToast("拒绝权限，请前往应用权限管理中打开权限~");
+//                            ToastMng.INSTANCE.showToast("拒绝权限，请前往应用权限管理中打开权限~");
+                            permissionState(permission, BasePermissionActivity.PermissionState.REFUSE);
                         }
 
                     }
                 });
+    }
+
+    protected void outputLog(Object msg) {
+        Log.i(TAG, msg.toString());
+    }
+
+    protected void permissionState(Permission permission, BasePermissionActivity.PermissionState state) {
+
     }
 }
