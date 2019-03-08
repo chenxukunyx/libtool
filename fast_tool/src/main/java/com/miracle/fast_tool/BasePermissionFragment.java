@@ -1,9 +1,12 @@
 package com.miracle.fast_tool;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import com.miracle.fast_tool.permission.Permission;
 import com.miracle.fast_tool.permission.RxPermissions;
 import com.miracle.fast_tool.utils.LogUtil;
@@ -15,20 +18,20 @@ import io.reactivex.functions.Consumer;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Created with Android Studio
+ *
+ * @author: chenxukun
+ * @date: 2019/3/8
+ * @time: 12:07 PM
+ * @fuction:
+ */
+public class BasePermissionFragment extends Fragment {
 
-public abstract class BasePermissionActivity extends AppCompatActivity {
-    private static final String TAG = "BasePermissionActivity";
+    private static final String TAG = "BasePermissionFragment";
 
     private Set<String> mPressionList = new HashSet<>();
     protected RxPermissions mRxPermissions;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mRxPermissions = new RxPermissions(this);
-        addPermission(addPermission());
-        requestPermission();
-    }
 
     private void addPermission(String... permissions) {
         if (permissions != null && permissions.length > 0) {
@@ -38,6 +41,18 @@ public abstract class BasePermissionActivity extends AppCompatActivity {
         }
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mRxPermissions = new RxPermissions(this);
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        requestPermission();
+    }
 
     protected  String[] addPermission(){
         return null;
@@ -83,9 +98,5 @@ public abstract class BasePermissionActivity extends AppCompatActivity {
 
                     }
                 });
-    }
-
-    protected void outputLog(Object msg) {
-        Log.i(TAG, msg.toString());
     }
 }
