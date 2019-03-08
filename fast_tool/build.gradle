@@ -19,6 +19,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
 }
 
 dependencies {
@@ -28,6 +33,9 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'com.uber.autodispose:autodispose:1.1.0'
     implementation 'com.uber.autodispose:autodispose-android-archcomponents:1.1.0'
+
+    compileOnly 'com.google.auto.value:auto-value-annotations:1.6.3'
+    annotationProcessor 'com.google.auto.value:auto-value:1.6.3'
 //    implementation 'com.jakewharton:butterknife:10.1.0'
 //    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 }
@@ -42,7 +50,7 @@ def libName = "libtool"
 //发布到组织名称名字，必须填写
 group = "com.miracle.libtool"
 // 版本号，下次更新是只需要更改版本号即可
-version = "1.0.4"
+version = "1.0.5"
 //上面配置后上传至JCenter后的编译路径是这样的： compile 'me.songning.CircleView:library:1.0.0'
 
 //生成源文件

@@ -1,100 +1,87 @@
 package com.miracle.fast_tool.permission;
 
-import io.reactivex.Observable;
-import io.reactivex.functions.BiConsumer;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
+import com.google.auto.value.AutoValue;
+import io.reactivex.annotations.CheckReturnValue;
+import io.reactivex.annotations.NonNull;
 
-import java.util.List;
+import static com.miracle.fast_tool.permission.Permission.State.*;
 
-public class Permission {
-    public final String name;
-    public final boolean granted;
-    public final boolean shouldShowRequestPermissionRationale;
-
-    public Permission(String name, boolean granted) {
-        this(name, granted, false);
+/**
+ * Created with Android Studio
+ *
+ * @author: chenxukun
+ * @date: 2019/3/8
+ * @time: 2:26 PM
+ * @fuction:
+ */
+@AutoValue
+public abstract class Permission {
+    /**
+     * This will create a granted Camera Permission.
+     */
+    @CheckReturnValue
+    public static Permission granted(final String name) {
+        return new AutoValue_Permission(name, GRANTED);
     }
 
-    public Permission(String name, boolean granted, boolean shouldShowRequestPermissionRationale) {
-        this.name = name;
-        this.granted = granted;
-        this.shouldShowRequestPermissionRationale = shouldShowRequestPermissionRationale;
+    /**
+     * This will create a denied Camera Permission.
+     */
+    @CheckReturnValue
+    public static Permission denied(final String name) {
+        return new AutoValue_Permission(name, DENIED);
     }
 
-    public Permission(List<Permission> permissions) {
-        name = combineName(permissions);
-        granted = combineGranted(permissions);
-        shouldShowRequestPermissionRationale = combineShouldShowRequestPermissionRationale(permissions);
+    /**
+     * This will create a denied not shown Camera Permission.
+     */
+    @CheckReturnValue
+    public static Permission deniedNotShown(final String name) {
+        return new AutoValue_Permission(name, DENIED_NOT_SHOWN);
     }
 
-    @Override
-    @SuppressWarnings("SimplifiableIfStatement")
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        final Permission that = (Permission) o;
-
-        if (granted != that.granted) return false;
-        if (shouldShowRequestPermissionRationale != that.shouldShowRequestPermissionRationale)
-            return false;
-        return name.equals(that.name);
+    /**
+     * This will create a policy revoked Camera Permission.
+     */
+    @CheckReturnValue
+    public static Permission revokedByPolicy(final String name) {
+        return new AutoValue_Permission(name, REVOKED_BY_POLICY);
     }
 
-    @Override
-    public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + (granted ? 1 : 0);
-        result = 31 * result + (shouldShowRequestPermissionRationale ? 1 : 0);
-        return result;
-    }
+    /**
+     * The name of the permission. For instance android.permission.CAMERA
+     */
+    @NonNull
+    public abstract String name();
 
-    @Override
-    public String toString() {
-        return "Permission{" +
-                "name='" + name + '\'' +
-                ", granted=" + granted +
-                ", shouldShowRequestPermissionRationale=" + shouldShowRequestPermissionRationale +
-                '}';
-    }
+    /**
+     * The state of the permission.
+     */
+    @NonNull
+    public abstract State state();
 
-    private String combineName(List<Permission> permissions) {
-        return Observable.fromIterable(permissions)
-                .map(new Function<Permission, String>() {
-                    @Override
-                    public String apply(Permission permission) throws Exception {
-                        return permission.name;
-                    }
-                }).collectInto(new StringBuilder(), new BiConsumer<StringBuilder, String>() {
-                    @Override
-                    public void accept(StringBuilder s, String s2) throws Exception {
-                        if (s.length() == 0) {
-                            s.append(s2);
-                        } else {
-                            s.append(", ").append(s2);
-                        }
-                    }
-                }).blockingGet().toString();
-    }
+    public enum State {
+        /**
+         * Permission has been granted.
+         */
+        GRANTED,
 
-    private Boolean combineGranted(List<Permission> permissions) {
-        return Observable.fromIterable(permissions)
-                .all(new Predicate<Permission>() {
-                    @Override
-                    public boolean test(Permission permission) throws Exception {
-                        return permission.granted;
-                    }
-                }).blockingGet();
-    }
+        /**
+         * Permission has been denied.
+         */
+        DENIED,
 
-    private Boolean combineShouldShowRequestPermissionRationale(List<Permission> permissions) {
-        return Observable.fromIterable(permissions)
-                .any(new Predicate<Permission>() {
-                    @Override
-                    public boolean test(Permission permission) throws Exception {
-                        return permission.shouldShowRequestPermissionRationale;
-                    }
-                }).blockingGet();
+        /**
+         * Permission is denied.
+         * Previously the requested permission was denied and never ask again was selected.
+         * This means that the user hasn't seen the permission dialog.
+         * The only way to let the user grant the permission is via the settings now.
+         */
+        DENIED_NOT_SHOWN,
+
+        /**
+         * Permission has been revoked by a policy.
+         */
+        REVOKED_BY_POLICY
     }
 }
