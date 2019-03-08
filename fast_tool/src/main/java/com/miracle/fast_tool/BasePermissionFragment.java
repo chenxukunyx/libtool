@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.miracle.fast_tool.permission.Permission;
+import com.miracle.fast_tool.permission.RxPermissionCallback;
+import com.miracle.fast_tool.permission.RxPermissionState;
 import com.miracle.fast_tool.permission.RxPermissions;
 import com.miracle.fast_tool.utils.LogUtil;
 import com.uber.autodispose.AutoDispose;
@@ -22,12 +24,6 @@ import java.util.Set;
 public class BasePermissionFragment extends Fragment {
 
     private static final String TAG = "BasePermissionFragment";
-
-    public enum PermissionState{
-        GRANTED,
-        SHOULDSHOWREQUESTPERMISSIONRATIONALE,
-        REFUSE
-    }
 
     private Set<String> mPressionList = new HashSet<>();
     protected RxPermissions mRxPermissions;
@@ -53,28 +49,25 @@ public class BasePermissionFragment extends Fragment {
         requestPermission();
     }
 
-    protected  String[] addPermission(){
+    protected String[] addPermission() {
         return null;
     }
 
     protected void requestPermission() {
-        if (mPressionList.size() >0) {
+        if (mPressionList.size() > 0) {
             mRxPermissions.requestEach(mPressionList.toArray(new String[mPressionList.size()]))
                     .as(AutoDispose.<Permission>autoDisposable(AndroidLifecycleScopeProvider.from(this)))
                     .subscribe(new Consumer<Permission>() {
                         @Override
                         public void accept(Permission permission) throws Exception {
                             if (permission.granted) {
-                                permissionState(permission, BasePermissionActivity.PermissionState.GRANTED);
                                 LogUtil.i(TAG, "get permission success");
                             } else if (permission.shouldShowRequestPermissionRationale) {
                                 LogUtil.i(TAG, "get permission failed, next time requset");
 //                            ToastMng.INSTANCE.showToast("拒绝访问，等待下次询问哦~");
-                                permissionState(permission, BasePermissionActivity.PermissionState.SHOULDSHOWREQUESTPERMISSIONRATIONALE);
                             } else {
                                 LogUtil.i(TAG, "get permission failed, no request again");
 //                            ToastMng.INSTANCE.showToast("拒绝权限，请前往应用权限管理中打开权限~");
-                                permissionState(permission, BasePermissionActivity.PermissionState.REFUSE);
                             }
 
                         }
@@ -82,23 +75,23 @@ public class BasePermissionFragment extends Fragment {
         }
     }
 
-    protected void requestPermission(String... permission) {
-        mRxPermissions.requestEach(permission)
+    protected void requestPermission(final RxPermissionCallback callback, String... permissions) {
+        mRxPermissions.requestEach(permissions)
                 .as(AutoDispose.<Permission>autoDisposable(AndroidLifecycleScopeProvider.from(this)))
                 .subscribe(new Consumer<Permission>() {
                     @Override
                     public void accept(Permission permission) throws Exception {
                         if (permission.granted) {
-                            permissionState(permission, BasePermissionActivity.PermissionState.GRANTED);
+                            callback.permissionState(RxPermissionState.GRANTED, permission);
                             LogUtil.i(TAG, "get permission success");
                         } else if (permission.shouldShowRequestPermissionRationale) {
                             LogUtil.i(TAG, "get permission failed, next time requset");
 //                            ToastMng.INSTANCE.showToast("拒绝访问，等待下次询问哦~");
-                            permissionState(permission, BasePermissionActivity.PermissionState.SHOULDSHOWREQUESTPERMISSIONRATIONALE);
+                            callback.permissionState(RxPermissionState.SHOULDSHOWREQUESTPERMISSIONRATIONALE, permission);
                         } else {
                             LogUtil.i(TAG, "get permission failed, no request again");
 //                            ToastMng.INSTANCE.showToast("拒绝权限，请前往应用权限管理中打开权限~");
-                            permissionState(permission, BasePermissionActivity.PermissionState.REFUSE);
+                            callback.permissionState(RxPermissionState.REFUSE, permission);
                         }
 
                     }
@@ -107,9 +100,5 @@ public class BasePermissionFragment extends Fragment {
 
     protected void outputLog(Object msg) {
         Log.i(TAG, msg.toString());
-    }
-
-    protected void permissionState(Permission permission, BasePermissionActivity.PermissionState state) {
-
     }
 }
