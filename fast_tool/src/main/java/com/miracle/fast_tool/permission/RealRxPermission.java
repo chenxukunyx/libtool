@@ -128,7 +128,7 @@ public final class RealRxPermission implements RxPermission {
     Observable<Permission> requestOnM(@NonNull final String... permissions) {
         final List<Observable<Permission>> list = new ArrayList<>(permissions.length);
         final List<String> unrequestedPermissions = new ArrayList<>();
-
+        final List<String> denyNotShowPermissions = new ArrayList<>();
         // In case of multiple permissions, we create an observable for each of them.
         // At the end, the observables are combined to have a unique response.
 

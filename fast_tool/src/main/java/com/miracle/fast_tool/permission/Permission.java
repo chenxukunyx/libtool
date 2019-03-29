@@ -6,14 +6,6 @@ import io.reactivex.annotations.NonNull;
 
 import static com.miracle.fast_tool.permission.Permission.State.*;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/3/8
- * @time: 2:26 PM
- * @fuction:
- */
 @AutoValue
 public abstract class Permission {
     /**
@@ -61,6 +53,7 @@ public abstract class Permission {
     public abstract State state();
 
     public enum State {
+
         /**
          * Permission has been granted.
          */

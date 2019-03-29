@@ -9,14 +9,6 @@ import io.reactivex.annotations.NonNull;
 
 import static android.os.Build.VERSION_CODES.M;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/3/8
- * @time: 2:47 PM
- * @fuction:
- */
 @TargetApi(M) public final class ShadowActivity extends AppCompatActivity {
     private static final String ARG_PERMISSIONS = "permissions";
     private static final String SAVE_RATIONALE = "save-rationale";

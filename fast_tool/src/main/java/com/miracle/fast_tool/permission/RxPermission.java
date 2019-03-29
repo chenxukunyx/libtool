@@ -5,14 +5,6 @@ import io.reactivex.Single;
 import io.reactivex.annotations.CheckReturnValue;
 import io.reactivex.annotations.NonNull;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/3/8
- * @time: 2:43 PM
- * @fuction:
- */
 public interface RxPermission {
 
     /**
