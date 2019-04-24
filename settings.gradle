@@ -1,2 +1,7 @@
-include ':fast_tool'
+include ':fast_tool',
+        ':lib_http',
+        ':lib_image',
+        ':lib_mvp',
+        ':lib_tools',
+        ':lib_view'
 //include        ':simple'

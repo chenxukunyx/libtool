@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bbl_ffffff">#ffffff</color>
+    <color name="bbl_e24848">#e24848</color>
+
+    <color name="white">#ffffff</color>
+    <color name="selector_grey">#DDDDDD</color>
+    <color name="color_f5c041">#f5c041</color>
+    <color name="color_4798F1">#4798F1</color>
+    <color name="color_F13E2F">#F13E2F</color>
+    <color name="color_4093f8">#4093F8</color>
+    <color name="color_grey">#666666</color>
+</resources>

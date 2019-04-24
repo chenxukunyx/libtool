@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--轮播图-->
+    <declare-styleable name="Banner">
+        <attr name="delay_time" format="integer" />
+        <attr name="scroll_time" format="integer" />
+        <attr name="is_auto_play" format="boolean" />
+        <attr name="title_background" format="color|reference" />
+        <attr name="title_textcolor" format="color" />
+        <attr name="title_textsize" format="dimension" />
+        <attr name="title_height" format="dimension" />
+        <attr name="indicator_width" format="dimension" />
+        <attr name="indicator_height" format="dimension" />
+        <attr name="indicator_margin" format="dimension" />
+        <attr name="indicator_drawable_selected" format="reference" />
+        <attr name="indicator_drawable_unselected" format="reference" />
+        <attr name="banner_layout" format="reference" />
+        <attr name="banner_default_image" format="reference" />
+        <attr name="image_scale_type" format="enum">
+            <enum name="center" value="0" />
+            <enum name="center_crop" value="1" />
+            <enum name="center_inside" value="2" />
+            <enum name="fit_center" value="3" />
+            <enum name="fit_end" value="4" />
+            <enum name="fit_start" value="5" />
+            <enum name="fit_xy" value="6" />
+            <enum name="matrix" value="7" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="BottomBarItem">
+        <!--默认状态下的图标-->
+        <attr name="iconNormal" format="reference"/>
+        <!--选中状态下的图标-->
+        <attr name="iconSelected" format="reference"/>
+
+        <!--底部文字-->
+        <attr name="itemText" format="string"/>
+        <!--文字大小-->
+        <attr name="itemTextSize" format="dimension"/>
+        <!--默认状态下的文字颜色-->
+        <attr name="textColorNormal" format="color"/>
+        <!--选中状态下的文字颜色-->
+        <attr name="textColorSelected" format="color"/>
+
+        <!--文字和图标的顶部距离-->
+        <attr name="itemMarginTop" format="dimension"/>
+
+        <!--是否开启触摸背景效果-->
+        <attr name="openTouchBg" format="boolean"/>
+        <!--设置触摸背景-->
+        <attr name="touchDrawable" format="reference"/>
+
+        <!--设置图标的宽度-->
+        <attr name="iconWidth" format="dimension"/>
+        <!--设置图标的高度-->
+        <attr name="iconHeight" format="dimension"/>
+
+        <!--设置BottomBarItem的padding-->
+        <attr name="itemPadding" format="dimension"/>
+
+        <!--设置未读数字体大小-->
+        <attr name="unreadTextSize" format="dimension"/>
+        <!--设置未读数字体颜色-->
+        <attr name="unreadTextColor" format="reference"/>
+        <!--设置未读数背景色-->
+        <attr name="unreadTextBg" format="reference"/>
+
+        <!--设置提示消息字体大小-->
+        <attr name="msgTextSize" format="dimension"/>
+        <!--设置提示消息字体颜色-->
+        <attr name="msgTextColor" format="reference"/>
+        <!--设置提示消息背景-->
+        <attr name="msgTextBg" format="reference"/>
+
+        <!--设置提示点背景-->
+        <attr name="notifyPointBg" format="reference"/>
+
+        <!--设置未读数组阈值 大于阈值的数字将显示为 n+ n为设置的阈值-->
+        <attr name="unreadThreshold" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="BottomBarLayout">
+        <attr name="smoothScroll" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="MZBannerView">
+        <attr name="open_mz_mode" format="boolean"/>
+        <attr name="canLoop" format="boolean"/>
+        <attr name="indicatorPaddingLeft" format="dimension"/>
+        <attr name="indicatorPaddingRight" format="dimension"/>
+        <attr name="indicatorPaddingTop" format="dimension"/>
+        <attr name="indicatorPaddingBottom" format="dimension"/>
+        <attr name="indicatorAlign">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+            <enum name="bottom" value="3"/>
+        </attr>
+        <attr name="middle_page_cover" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="LabelView">
+        <attr name="lv_type" format="enum">
+            <enum name="type_top" value="0"/>
+            <enum name="type_newest" value="1"/>
+            <enum name="type_hotest" value="2"/>
+        </attr>
+        <attr name="lv_background" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="RatingBar" tools:ignore="ResourceName">
+        <attr name="starImageSize" format="dimension"/>
+        <attr name="starImageWidth" format="dimension"/>
+        <attr name="starImageHeight" format="dimension"/>
+        <attr name="starImagePadding" format="dimension"/>
+        <attr name="starCount" format="integer"/>
+        <attr name="starNum" format="integer"/>
+        <attr name="starEmpty" format="reference"/>
+        <attr name="starFill" format="reference"/>
+        <attr name="starHalf" format="reference"/>
+        <attr name="clickable" format="boolean"/>
+        <attr name="halfstart" format="boolean"/>
+    </declare-styleable>
+
+
+    <attr name="interval" format="integer"/>
+    <attr name="showIndicator" format="boolean"/>
+    <attr name="orientation" format="enum">
+        <enum name="horizontal" value="0"/>
+        <enum name="vertical" value="1"/>
+    </attr>
+    <attr name="autoPlaying" format="boolean"/>
+    <declare-styleable name="RecyclerViewBannerBase">
+        <attr name="interval"/>
+        <attr name="showIndicator" />
+        <attr name="orientation" />
+        <attr name="autoPlaying"/>
+        <attr name="indicatorSelectedSrc" format="color|reference"/>
+        <attr name="indicatorUnselectedSrc" format="color|reference"/>
+        <attr name="indicatorSpace" format="dimension|reference"/>
+        <attr name="indicatorMarginLeft" format="dimension|reference"/>
+        <attr name="indicatorMarginRight" format="dimension|reference"/>
+        <attr name="indicatorMarginBottom" format="dimension|reference"/>
+        <attr name="indicatorGravity" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="BannerLayout">
+        <attr name="interval" />
+        <attr name="showIndicator" />
+        <attr name="orientation" />
+        <attr name="autoPlaying"/>
+        <attr name="itemSpace" format="integer"/>
+        <attr name="centerScale" format="float"/>
+        <attr name="moveSpeed" format="float"/>
+    </declare-styleable>
+</resources>
