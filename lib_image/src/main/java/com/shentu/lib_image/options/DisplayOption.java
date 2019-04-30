@@ -5,14 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/26
- * @time: 3:52 PM
- * @fuction:
- */
+
 public class DisplayOption {
 
     /**

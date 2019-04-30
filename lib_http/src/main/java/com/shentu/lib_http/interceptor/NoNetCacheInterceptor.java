@@ -11,14 +11,7 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/25
- * @time: 2:26 PM
- * @fuction:
- */
+
 public class NoNetCacheInterceptor implements Interceptor {
 
     private boolean forceCache;

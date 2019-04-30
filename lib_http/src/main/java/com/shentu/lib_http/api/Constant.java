@@ -4,14 +4,6 @@ import com.shentu.lib_tools.ToolsKernel;
 
 import java.io.File;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/25
- * @time: 3:55 PM
- * @fuction:
- */
 public class Constant {
 
     public static final String HTTP_TAG = "HttpApi";

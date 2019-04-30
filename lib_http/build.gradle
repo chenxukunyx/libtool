@@ -1,13 +1,15 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 android {
-    compileSdkVersion versions.compileSdk
+    compileSdkVersion 28
+
     defaultConfig {
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.targetSdk
+        minSdkVersion 19
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
     }
 
     buildTypes {
@@ -26,12 +28,12 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
-    api "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
-    api "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
-    api "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    api 'io.reactivex.rxjava2:rxjava:2.2.7'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'com.squareup.retrofit2:retrofit:2.5.0'
     api 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    api "com.squareup.retrofit2:converter-gson:$gsonVersion"
-    api "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    api 'com.squareup.retrofit2:converter-gson:2.5.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.12.0'
     api project(':lib_tools')
     //cookie 持久化
     api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
@@ -47,7 +49,7 @@ def libName = "libtool"
 //发布到组织名称名字，必须填写
 group = "com.miracle.libtool"
 // 版本号，下次更新是只需要更改版本号即可
-version = "1.0.8"
+version = "1.0.9"
 //上面配置后上传至JCenter后的编译路径是这样的： compile 'me.songning.CircleView:library:1.0.0'
 
 //生成源文件
@@ -129,7 +131,7 @@ bintray {
         //发布到JCenter上的项目名字
         name = libName
         //项目描述
-        desc = 'fast integratio tools.'
+        desc = 'lib_http.'
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]

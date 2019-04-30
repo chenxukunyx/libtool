@@ -31,14 +31,7 @@ import java.lang.ref.WeakReference;
 
 import androidx.annotation.Nullable;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/26
- * @time: 4:01 PM
- * @fuction:
- */
+
 public class GlideLoader extends IImageLoader {
 
     /**
@@ -57,8 +50,8 @@ public class GlideLoader extends IImageLoader {
     /**
      * 特殊url的兼容
      *
-     * @param url
-     * @return
+     * param url
+     * return
      */
     private String parseUrl(String url) {
         if (url == null) {
@@ -79,8 +72,8 @@ public class GlideLoader extends IImageLoader {
     /**
      * 遍历工厂获取option
      *
-     * @param name
-     * @return
+     * param name
+     * return
      */
     private DisplayOption getOptionInFactory(String name) {
         DisplayOption option = null;
@@ -96,8 +89,8 @@ public class GlideLoader extends IImageLoader {
     /**
      * 加载网络图片
      *
-     * @param imageView
-     * @param url
+     * param imageView
+     * param url
      */
     @Override
     public void display(ImageView imageView, String url) {
@@ -134,8 +127,8 @@ public class GlideLoader extends IImageLoader {
     /**
      * 加载资源图片
      *
-     * @param imageView
-     * @param resId
+     * param imageView
+     * param resId
      */
     @Override
     public void display(ImageView imageView, int resId) {
@@ -174,8 +167,8 @@ public class GlideLoader extends IImageLoader {
     /**
      * 加载本地图片
      *
-     * @param imageView
-     * @param file
+     * param imageView
+     * param file
      */
     @Override
     public void display(ImageView imageView, File file) {

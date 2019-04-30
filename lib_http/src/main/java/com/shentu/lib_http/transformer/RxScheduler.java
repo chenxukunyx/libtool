@@ -12,14 +12,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/25
- * @time: 3:18 PM
- * @fuction:
- */
 public class RxScheduler {
 
     static final ObservableTransformer schedulersTransformer = new ObservableTransformer() {
@@ -34,8 +26,6 @@ public class RxScheduler {
 
     /**
      * 有BaseResponse嵌套的情况，使用此方法
-     * @param <T>
-     * @return
      */
     public static <T> ObservableTransformer<BaseResponse<T>, BaseResponse<T>> baseSchedulers() {
         return (ObservableTransformer<BaseResponse<T>, BaseResponse<T>>) schedulersTransformer;
@@ -77,8 +67,6 @@ public class RxScheduler {
 
     /**
      * 没有BaseResponse嵌套的情况，使用此方法
-     * @param <T>
-     * @return
      */
     public static <T> ObservableTransformer<T, T> schedulers() {
         return (ObservableTransformer<T, T>) schedulersTransformer;
@@ -87,8 +75,6 @@ public class RxScheduler {
 
     /**
      * 没有BaseResponse嵌套的情况，使用此方法
-     * @param <T>
-     * @return
      */
     public static <T extends BaseResponse> ObservableTransformer<T, T> schdulerAndHandleResponse() {
         return upstream ->

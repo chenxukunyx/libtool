@@ -5,14 +5,6 @@ import com.shentu.lib_http.exception.ApiException;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/28
- * @time: 9:57 AM
- * @fuction:
- */
 public abstract class BaseObserver<T> implements Observer<T> {
 
     public void showLoading() {

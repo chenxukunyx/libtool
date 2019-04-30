@@ -1,13 +1,6 @@
 package com.shentu.lib_http.bean;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/27
- * @time: 1:50 PM
- * @fuction:
- */
+
 public class BaseResponse<T> {
 
     private String state;

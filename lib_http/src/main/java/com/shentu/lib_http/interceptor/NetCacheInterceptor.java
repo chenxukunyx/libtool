@@ -6,14 +6,6 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/25
- * @time: 2:19 PM
- * @fuction:
- */
 public class NetCacheInterceptor implements Interceptor {
 
     //是否需要加载缓存，不需要加载缓存时，直接将maxAge设置为0，在有网的情况下会直接请求网络

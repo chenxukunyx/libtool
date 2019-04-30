@@ -48,7 +48,7 @@ public class MaskTransformation implements Transformation<Bitmap> {
     private Bitmap.Config mBitmapConfig;
 
     /**
-     * @param maskId If you change the mask file, please also rename the mask file, or Glide will get
+     * param maskId If you change the mask file, please also rename the mask file, or Glide will get
      *               the cache with the old mask. Because getId() return the same values if using the
      *               same make file name. If you have a good idea please tell us, thanks.
      */

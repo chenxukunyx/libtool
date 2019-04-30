@@ -9,14 +9,7 @@ import com.shentu.lib_image.options.InitOption;
 
 import java.io.File;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/26
- * @time: 3:50 PM
- * @fuction:
- */
+
 public abstract class IImageLoader {
 
     public abstract void display(ImageView imageView, String url);

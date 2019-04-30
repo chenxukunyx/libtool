@@ -15,14 +15,7 @@ import java.net.UnknownHostException;
 
 import retrofit2.HttpException;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/25
- * @time: 3:29 PM
- * @fuction:
- */
+
 public class ApiException extends Exception{
 
     private final int code;

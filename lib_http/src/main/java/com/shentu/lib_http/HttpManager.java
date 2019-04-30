@@ -7,15 +7,6 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/25
- * @time: 3:24 PM
- * @fuction:
- * T ApiService
- */
 public class HttpManager<T> {
 
 
@@ -77,7 +68,7 @@ public class HttpManager<T> {
 
     /**
      * 创建apiService
-     * @return
+     * return
      */
     public T create() {
         T apiService = mRetrofit.create(apiServiceClass);

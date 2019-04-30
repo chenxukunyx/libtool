@@ -3,14 +3,7 @@ package com.shentu.lib_image.options;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/26
- * @time: 3:53 PM
- * @fuction:
- */
+
 public abstract class DisplayOptionFactory<T> {
 
     private final static String defaultOptionName = DisplayOptionFactory.class.getName();
@@ -20,7 +13,7 @@ public abstract class DisplayOptionFactory<T> {
     /**
      * 获取默认option在factory中的键值名字
      *
-     * @return
+     * return
      */
     public static String getDefaultOptionName() {
         return defaultOptionName;
@@ -31,9 +24,9 @@ public abstract class DisplayOptionFactory<T> {
     /**
      * 增加一个圆角为radius的option，其他参数用默认值
      *
-     * @param name     option名字
-     * @param radius   圆角像素直径
-     * @param position 圆角位置
+     * param name     option名字
+     * param radius   圆角像素直径
+     * param position 圆角位置
      */
     public DisplayOptionFactory add(String name, int radius, int position) {
         DisplayOption op = new DisplayOption().radius(radius).radiusPosition(position);
@@ -45,10 +38,10 @@ public abstract class DisplayOptionFactory<T> {
     /**
      * 增加一个圆角为radius，对齐方式为fitop的option，其他参数默认
      *
-     * @param name
-     * @param fitop
-     * @param radius
-     * @param position
+     * param name
+     * param fitop
+     * param radius
+     * param position
      */
     public DisplayOptionFactory add(String name, DisplayOption.FitOption fitop, int radius, int position) {
         DisplayOption op = new DisplayOption().fitOption(fitop).radius(radius).radiusPosition(position);

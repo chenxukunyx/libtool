@@ -6,14 +6,7 @@ import com.shentu.lib_image.loader.GlideLoader;
 import com.shentu.lib_image.loader.IImageLoader;
 import com.shentu.lib_image.options.InitOption;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/26
- * @time: 3:55 PM
- * @fuction:
- */
+
 public class ImageLoader {
 
     private static IImageLoader mLoader;

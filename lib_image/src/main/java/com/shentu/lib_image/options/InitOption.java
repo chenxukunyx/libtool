@@ -1,13 +1,6 @@
 package com.shentu.lib_image.options;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/26
- * @time: 3:53 PM
- * @fuction:
- */
+
 public class InitOption {
 
     /**

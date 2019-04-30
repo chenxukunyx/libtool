@@ -21,14 +21,7 @@ import com.shentu.lib_image.transform.RoundedCornersTransformation;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/26
- * @time: 3:55 PM
- * @fuction:
- */
+
 public class GlideOptionFactory extends DisplayOptionFactory<RequestOptions> {
     /**
      * application context
@@ -46,8 +39,8 @@ public class GlideOptionFactory extends DisplayOptionFactory<RequestOptions> {
     /**
      * 转换为glide cornerType
      *
-     * @param op
-     * @return
+     * param op
+     * return
      */
     RoundedCornersTransformation.CornerType getGlideCornerType(DisplayOption op) {
 

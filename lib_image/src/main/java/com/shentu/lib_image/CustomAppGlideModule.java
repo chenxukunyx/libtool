@@ -6,17 +6,7 @@ package com.shentu.lib_image;
 //import com.bumptech.glide.load.engine.cache.ExternalPreferredCacheDiskCacheFactory;
 //import com.bumptech.glide.load.engine.cache.LruResourceCache;
 //import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
-//import com.bumptech.glide.module.AppGlideModule;
-//import com.shentu.lib_image.options.InitOption;
 
-/**
- * Created with Android Studio
- *
- * @author: chenxukun
- * @date: 2019/2/26
- * @time: 4:05 PM
- * @fuction:
- */
 //public class CustomAppGlideModule extends AppGlideModule {
 //
 //    @Override

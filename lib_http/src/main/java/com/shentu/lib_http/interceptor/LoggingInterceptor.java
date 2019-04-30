@@ -37,73 +37,20 @@ import okio.Buffer;
 import okio.BufferedSource;
 import retrofit2.Invocation;
 
-/**
- * An OkHttp interceptor which logs request and response information. Can be applied as an
- * {@linkplain OkHttpClient#interceptors() application interceptor} or as a {@linkplain
- * OkHttpClient#networkInterceptors() network interceptor}. <p> The format of the logs created by
- * this class should not be considered stable and may change slightly between releases. If you need
- * a stable logging format, use your own interceptor.
- */
+
 public final class LoggingInterceptor implements Interceptor {
 
     private static final String TAG = Constant.HTTP_TAG;
     private static final Charset UTF8 = Charset.forName("UTF-8");
 
     public enum Level {
-        /**
-         * No logs.
-         */
+
         NONE,
-        /**
-         * Logs request and response lines.
-         *
-         * <p>Example:
-         * <pre>{@code
-         * --> POST /greeting http/1.1 (3-byte body)
-         *
-         * <-- 200 OK (22ms, 6-byte body)
-         * }</pre>
-         */
+
         BASIC,
-        /**
-         * Logs request and response lines and their respective headers.
-         *
-         * <p>Example:
-         * <pre>{@code
-         * --> POST /greeting http/1.1
-         * Host: example.com
-         * Content-Type: plain/text
-         * Content-Length: 3
-         * --> END POST
-         *
-         * <-- 200 OK (22ms)
-         * Content-Type: plain/text
-         * Content-Length: 6
-         * <-- END HTTP
-         * }</pre>
-         */
+
         HEADERS,
-        /**
-         * Logs request and response lines and their respective headers and bodies (if present).
-         *
-         * <p>Example:
-         * <pre>{@code
-         * --> POST /greeting http/1.1
-         * Host: example.com
-         * Content-Type: plain/text
-         * Content-Length: 3
-         *
-         * Hi?
-         * --> END POST
-         *
-         * <-- 200 OK (22ms)
-         * Content-Type: plain/text
-         * Content-Length: 6
-         *
-         * Hello!
-         * <-- END HTTP
-         * }</pre>
-         */
+
         BODY
     }
 
@@ -219,10 +166,7 @@ public final class LoggingInterceptor implements Interceptor {
         return response;
     }
 
-    /**
-     * Returns true if the body in question probably contains human readable text. Uses a small sample
-     * of code points to detect unicode control characters commonly used in binary file signatures.
-     */
+
     static boolean isPlaintext(Buffer buffer) {
         try {
             Buffer prefix = new Buffer();
