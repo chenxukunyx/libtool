@@ -8,6 +8,8 @@ import android.os.Environment;
 import android.os.Process;
 import android.util.Log;
 import android.widget.Toast;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -54,6 +56,7 @@ public class DefaultCrashHandler implements Thread.UncaughtExceptionHandler, ICr
             pw.println();
             ex.printStackTrace(pw);
             pw.close();
+            dumpExceptionToCloud(file);
             Log.e(TAG, "dump crash info success");
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
@@ -62,14 +65,28 @@ public class DefaultCrashHandler implements Thread.UncaughtExceptionHandler, ICr
     }
 
     @Override
-    public void dumpExceptionToCloud(Throwable e) {
+    public void dumpExceptionToCloud(File file) {
+        CarshUploadToAliyun.getInstance().putToAliyunAsync(file.getPath(), file.getName(), new UploadListener<PutObjectRequest, PutObjectResult>() {
+            @Override
+            public void progress(int present) {
 
+            }
+
+            @Override
+            public void success(PutObjectRequest putObjectRequest, PutObjectResult putObjectResult) {
+                Log.e(TAG, "dump to cloud crash info success");
+            }
+
+            @Override
+            public void failure(PutObjectRequest putObjectRequest, Exception clientException, Exception serviceException) {
+                Log.i(TAG, "dump to cloud crash info failure ");
+            }
+        });
     }
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {
         dumpExceptionToSdcard(e);
-        dumpExceptionToCloud(e);
         if (mDefaultCrashHandler != null) {
             try {
                 Thread.sleep(2000);
